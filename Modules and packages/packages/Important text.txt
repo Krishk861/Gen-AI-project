@@ -1,0 +1,2 @@
+Hi my name is Krish.
+This is a file required for shutil.copy

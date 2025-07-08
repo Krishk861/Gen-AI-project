@@ -1,6 +1,7 @@
 import streamlit as st
 import numpy as np
 import pickle
+import tensorflow
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
@@ -18,7 +19,7 @@ def predict_next_word(model,tokenizer,text,max_sequences_len):
         token_list= token_list[-(max_sequences_len-1):]
     token_list= pad_sequences([token_list],maxlen=max_sequences_len-1,padding='pre')
     predicted=model.predict(token_list,verbose=0)
-    predicted_word_index= np.argmax(predicted,axis=1)
+    predicted_word_index= np.argmax(predicted,axis=1)[0]
     for word,index in tokenizer.word_index.items():
         if index== predicted_word_index:
             return word
